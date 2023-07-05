@@ -1,0 +1,21 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const appointment_1 = require("@validations/appointment");
+const appointment_2 = require("@controllers/appointment");
+const auth_1 = require("@middleware/auth");
+const express_1 = __importDefault(require("express"));
+var router = express_1.default.Router();
+router.post("/request-appointment", auth_1.ensureAuthenticated, appointment_1.requestAppointmentValidation, appointment_2.requestAppointment);
+router.get("/get-all-awaiting-appointments", auth_1.ensureAuthenticated, appointment_2.getAllAwaitingAppointments);
+router.post("/reject-appointment-request", auth_1.ensureAuthenticated, appointment_1.rejectAppointmentRequestValidation, appointment_2.rejectAppointmentRequest);
+router.get("/get-all-active-appointments", auth_1.ensureAuthenticated, appointment_2.getAllActiveAppointments);
+router.post("/accept-appointment", auth_1.ensureAuthenticated, appointment_1.acceptAppointmentRequestValidation, appointment_2.acceptAppointmentRequest);
+router.post("/finish-appointment", auth_1.ensureAuthenticated, appointment_1.finishAppointmentValidation, appointment_2.finishAppointment);
+router.post("/cancel-appointment", auth_1.ensureAuthenticated, appointment_1.cancelAppointmentValidation, appointment_2.cancelAppointment);
+router.post("/write-prescription", auth_1.ensureAuthenticated, appointment_1.writePrescriptionValidation, appointment_2.writePrescription);
+router.get("/get-upcoming-appointment", auth_1.ensureAuthenticated, appointment_2.getUPComingAppointment);
+router.get("/get-all-appointments", auth_1.ensureAuthenticated, appointment_2.getAllAppointments);
+module.exports = router;
